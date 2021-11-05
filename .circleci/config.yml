@@ -18,6 +18,7 @@ jobs:
             cd frontend
             npm install
             npm run build
+            npm update
             exit 1
       - save_cache:
           paths: [frontend/node_modules]
