@@ -14,7 +14,6 @@ jobs:
           command: |
                cd frontend
                sudo npm install
-               sudo npm run start
                sudo npm build
                exit 1
       - save_cache:
