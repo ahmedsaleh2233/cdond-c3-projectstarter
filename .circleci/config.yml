@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Build front-end
           command: |
-              sudo cd frontend
+               cd frontend
               sudo npm install
               sudo npm run build            
               exit 1
@@ -30,7 +30,7 @@ jobs:
       - run:
           name: Back-end build
           command: |
-              sudo cd backend
+               cd backend
               sudo npm install
               sudo npm run build            
               exit 1
