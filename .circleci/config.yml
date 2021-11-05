@@ -1,6 +1,4 @@
 version: 2.1
-
-   
     
 
             
@@ -48,6 +46,7 @@ workflows:
   default:
     jobs:
       - build-frontend
+      -build-backend
      
       
       
