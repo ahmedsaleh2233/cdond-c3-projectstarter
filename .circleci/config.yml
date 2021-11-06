@@ -38,7 +38,6 @@ jobs:
  
    test-frontend:
     docker:
-       circleci/node:13.8.0
     steps:
       cd frontend
       npm install
