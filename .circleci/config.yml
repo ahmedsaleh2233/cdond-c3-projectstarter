@@ -46,8 +46,9 @@ jobs:
        - run:
            name: test front-end
            command: |
-               sudo npm install
-               sudo npm run test
+              cd frontend
+              npm install
+              npm run test
           
 
    
