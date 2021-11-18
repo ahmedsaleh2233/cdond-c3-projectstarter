@@ -128,7 +128,45 @@ jobs:
                --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
                
                 
-   
+  configure-infrastructure:
+    docker:
+      - image: amazon/aws-cli 
+    steps:
+      - checkout
+      - run:
+          name: Install tar and gzip
+          command: | 
+               yum -y install tar
+               yum -y install gzip
+      - run:
+          name: Install dependencies
+          command: |
+            # Your code here
+            exit 1
+      - run:
+          name: Configure server
+          command: |
+            # Your code here
+            exit 1
+      # Here's where you will add some code to rollback on failure      
+
+  run-migrations:
+    docker:
+      # Docker image here that supports NodeJS
+    steps:
+      # Checkout code from git
+      - run:
+          name: Run migrations
+          command: |
+            # Your code here
+            exit 1
+      - run:
+          name: Send migration results to memstash
+          command: |
+            # Your code here
+            exit 1
+     # Here's where you will add some code to rollback on failure      
+ 
   
 
 workflows:
@@ -151,4 +189,17 @@ workflows:
           filters:
             branches:
               only: [master]
-      
+      - configure-infrastructure:
+          requires: [deploy-infrastructure]
+      - run-migrations:
+          requires: [configure-infrastructure]
+      #- deploy-frontend:
+          #requires: [run-migrations]
+      #- deploy-backend:
+          #requires: [run-migrations]
+      #- smoke-test:
+         # requires: [deploy-backend, deploy-frontend]
+      #- cloudfront-update:
+          #requires: [smoke-test]
+      #- cleanup:
+         # requires: [cloudfront-update]
