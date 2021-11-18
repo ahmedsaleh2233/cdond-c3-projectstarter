@@ -128,7 +128,7 @@ jobs:
                --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
                
                 
-  configure-infrastructure:
+   configure-infrastructure:
     docker:
       - image: amazon/aws-cli 
     steps:
@@ -150,9 +150,9 @@ jobs:
             exit 1
       # Here's where you will add some code to rollback on failure      
 
-  run-migrations:
+   run-migrations:
     docker:
-      # Docker image here that supports NodeJS
+     - image: amazon/aws-cli
     steps:
       # Checkout code from git
       - run:
