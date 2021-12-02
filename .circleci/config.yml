@@ -127,6 +127,17 @@ jobs:
                 --tags project=your-tag \
                 --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
                 --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
+                
+         
+      - run:
+          name: Run Playbook and Configure server
+          command: |
+            cd ansible
+            aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory
+      - persist_to_workspace:
+          root: ansible
+          paths:
+            - inventory.txt
                  
       - run:
           name: Ensure front-end infrastructure exist
@@ -140,24 +151,21 @@ jobs:
                 
    configure-infrastructure:
     docker:
-      - image: amazon/aws-cli 
+      - image: python:3.7-alpine3.11
     steps:
       - checkout
-      - run:
-          name: Install tar and gzip
-          command: | 
-               yum -y install tar
-               yum -y install gzip
+      - add_ssh_keys:
+          fingerprints: ["29:5d:81:13:dd:c2:b5:72:1b:d8:ce:e3:55:04:34:38"] # SSH Key
       - run:
           name: Install dependencies
           command: |
-            # Your code here
-            exit 1
+            # install the dependencies needed for your playbook
+            apk add --update ansible 
       - run:
           name: Configure server
           command: |
-            # Your code here
-            exit 1
+            ansible-playbook -i inventory.txt configure-server.yml
+            
       # Here's where you will add some code to rollback on failure      
 
    run-migrations:
