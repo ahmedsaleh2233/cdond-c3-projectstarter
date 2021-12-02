@@ -130,7 +130,6 @@ jobs:
                 
          
       - run:
-           - run:
           name: Save backend URL and IP (for ansible)
           command: |
             BACKEND_AWS_PUBLIC_IP=$(aws ec2 describe-instances \
