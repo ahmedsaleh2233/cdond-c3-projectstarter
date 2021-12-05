@@ -132,14 +132,14 @@ jobs:
       - run:
           name: Save backend URL and IP (for ansible)
           command: |
-            BACKEND_AWS_PUBLIC_IP=$(aws ec2 describe-instances \
+              BACKEND_AWS_PUBLIC_IP=$(aws ec2 describe-instances \
               --filters "Name=tag:Name,Values=backend-prod-${CIRCLE_WORKFLOW_ID:0:7}" \
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --output text)
-            echo "http://$BACKEND_AWS_PUBLIC_IP:3030" >> .circleci/files/backend_url.txt
-            echo "[all]" >> .circleci/ansible/inventory.txt
-            echo "$BACKEND_AWS_PUBLIC_IP" >> .circleci/ansible/inventory.txt
-            cat .circleci/files/backend_url.txt
+              echo "http://$BACKEND_AWS_PUBLIC_IP:3030" >> .circleci/files/backend_url.txt
+              echo "[all]" >> .circleci/ansible/inventory.txt
+              echo "$BACKEND_AWS_PUBLIC_IP" >> .circleci/ansible/inventory.txt
+              cat .circleci/files/backend_url.txt
       - run: yum -y install tar gzip
       - persist_to_workspace:
           root: ~/
