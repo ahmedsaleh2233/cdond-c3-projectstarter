@@ -134,10 +134,8 @@ jobs:
           command: |
             cd .circleci/ansible
             aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory
-      - persist_to_workspace:
-          root: ansible
-          paths:
-            - inventory.txt   
+            cat inventory
+ 
       - run:
           name: Ensure front-end infrastructure exist
           command: |
