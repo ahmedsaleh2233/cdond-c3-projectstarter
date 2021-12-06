@@ -133,8 +133,12 @@ jobs:
           name: Run Playbook and Configure server
           command: |
             cd .circleci/ansible
-            aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --output text >> inventory
-            cat inventory
+            aws ec2 describe-instances \ 
+             --query 'Reservations[*].Instances[*].PublicIpAddress' \
+             --filters "Name=tag:Project,Values=udacity" \
+             --output text >> inventory
+             cat inventory
+            
  
       - run:
           name: Ensure front-end infrastructure exist
