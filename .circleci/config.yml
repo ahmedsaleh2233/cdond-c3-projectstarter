@@ -127,20 +127,7 @@ jobs:
                 --tags project=your-tag \
                 --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
                 --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
-                
-         
-      - run:
-          name: Save backend URL and IP (for ansible)
-          command: |
-               aws ec2 describe-instances \
-                --filter "Name=instance-state-name,Values=running" \
-               --query "Reservations[*].Instances[*].[PublicIpAddress, Tags[?Key=='Name'].Value|[0]]" \
-               --output text >> inventory
-      - run: yum -y install tar gzip
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - project/.circleci/ansible/inventory.txt
+               
          
       - run:
           name: Ensure front-end infrastructure exist
@@ -164,6 +151,19 @@ jobs:
           command: |
             # install the dependencies needed for your playbook
             apk add --update ansible 
+            
+      - run:
+          name: Save backend URL and IP (for ansible)
+          command: |
+                aws ec2 describe-instances \
+                --filter "Name=instance-state-name,Values=running" \
+                --query "Reservations[*].Instances[*].[PublicIpAddress, Tags[?Key=='Name'].Value|[0]]" \
+                --output text >> inventory
+      - run: yum -y install tar gzip
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/.circleci/ansible/inventory.txt
       - run:
           name: Configure server
           command: |
