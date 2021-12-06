@@ -135,12 +135,11 @@ jobs:
                aws ec2 describe-instances \
                 --filter "Name=instance-state-name,Values=running" \
                --query "Reservations[*].Instances[*].[PublicIpAddress, Tags[?Key=='Name'].Value|[0]]" \
-               --output text
+               --output text >> inventory
       - run: yum -y install tar gzip
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/files/backend_url.txt
             - project/.circleci/ansible/inventory.txt
          
       - run:
