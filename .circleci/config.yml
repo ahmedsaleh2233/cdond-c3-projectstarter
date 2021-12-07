@@ -145,7 +145,7 @@ jobs:
       - persist_to_workspace:
             root: ansible
             paths:
-              - inventory.txt     
+              - .circleci/ansible/inventory.txt     
             
  
       - run:
