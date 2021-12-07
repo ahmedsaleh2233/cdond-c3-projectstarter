@@ -178,12 +178,12 @@ jobs:
           #command: |    
           
       - attach_workspace:
-           at: /tmp/ansible
+           at: .circleci/ansible
       - run:
           name: Configure server 
           command: |
            cd .circleci/ansible
-             ansible-playbook -i /tmp/ansible/inventory.txt configure-server.yml          
+             ansible-playbook -i inventory.txt configure-server.yml          
           
            #cd .circleci/ansible
            #ansible-playbook -i inventory.txt configure-server.yml
