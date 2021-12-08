@@ -140,8 +140,7 @@ jobs:
                --query 'Reservations[*].Instances[*].PublicIpAddress' \
                --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
                --output text >> backend/inventory.txt
-                cat ansible/inventory.txt
-                
+                cat backend/inventory.txt
       - persist_to_workspace:
             root: backend
             paths:
@@ -179,7 +178,7 @@ jobs:
           #command: |    
           
       - attach_workspace:
-           at: /tmp/ansible
+           at: /tmp/backend
       - run:
           name: Configure server 
           command: |
