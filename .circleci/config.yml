@@ -186,7 +186,7 @@ jobs:
           command: |
             #cat /tmp/backend/inventory.txt
                   
-            cd .circleci/ansible
+            #cd .circleci/ansible
              ansible-playbook -i inventory.txt configure-server.yml          
           
            #cd .circleci/ansible
