@@ -173,9 +173,9 @@ jobs:
             
             
             
-      #- run:
-          #name: Configure server
-          #command: |    
+      - run:
+          name: Configure server
+          command: | cat /tmp/backend/inventory.txt
           
       - attach_workspace:
            at: /tmp/backend
