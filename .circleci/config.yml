@@ -173,15 +173,17 @@ jobs:
             
             
             
-      - run:
-          name: Configure server
-          command: | cat /tmp/backend/inventory.txt
+      #- run:
+          #name: Configure server
+          #command: | cat /tmp/backend/inventory.txt
           
       - attach_workspace:
            at: /tmp/backend
       - run:
           name: Configure server 
           command: |
+            cat /tmp/backend/inventory.txt
+                  
            cd .circleci/ansible
              ansible-playbook -i inventory.txt configure-server.yml          
           
