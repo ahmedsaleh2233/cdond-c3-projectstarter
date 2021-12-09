@@ -147,9 +147,9 @@ jobs:
                --output text >> .circleci/ansible/inventory.txt
                 
       - persist_to_workspace:
-            root: .circleci/ansible
+            root: ~
             paths:
-              - inventory.txt
+              - project/.circleci/ansible/inventory.txt
            
             
  
@@ -183,14 +183,14 @@ jobs:
           #command: | cat /tmp/backend/inventory.txt
           
       - attach_workspace:
-           at: /tmp/ansible
+           at: ~/
         
       - run:
           name: Configure server 
           command: |
-            #cat /tmp/backend/inventory.txt
+            cat .circleci/ansible/inventory.txt
                   
-            ansible-playbook -i /tmp/ansible/inventory.txt .circleci/ansible/configure-server.yml
+            #ansible-playbook -i .circleci/ansible/inventory.txt .circleci/ansible/configure-server.yml
                        
           
            #cd .circleci/ansible
