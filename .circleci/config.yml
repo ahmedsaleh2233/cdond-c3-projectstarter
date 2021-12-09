@@ -190,7 +190,7 @@ jobs:
           command: |
             #cat /tmp/backend/inventory.txt
                   
-            ansible-playbook -i /tmp/ansible/inventory.txt .circleci/ansible/configure-server.ym
+            ansible-playbook -i /tmp/ansible/inventory.txt .circleci/ansible/configure-server.yml
                        
           
            #cd .circleci/ansible
